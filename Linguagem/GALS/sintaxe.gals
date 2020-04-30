@@ -1,0 +1,45 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+Package = lib
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = Stream
+Parser = SLR
+#RegularDefinitions
+D:[0-9]
+NULL:[\s\t\r\n]
+L : [A-Za-z]
+#Tokens
+ : {NULL}+
+LOG : Show
+INT : {D}+
+VAR : {L}*
+EOL : ";"
+ADD : "+"
+SUB : "-"
+MUL : "*"
+DIV : "/"
+EXP : "^"
+EQL : "="
+OPR : "("
+CPR : ")"
+
+#NonTerminals
+<CMD_LIST>
+<CMD>
+<MTHPR1>
+<MTHPR2>
+<MTHPR3>
+<MTHPR4>
+#Grammar
+<CMD_LIST> ::= <CMD_LIST><CMD> | <CMD>;
+<CMD> 	 ::= VAR #1 EQL <MTHPR4> EOL #4 | LOG #5 OPR <MTHPR4> CPR EOL  #6 | <MTHPR4>;
+<MTHPR4> ::= <MTHPR4> ADD <MTHPR3> #10 | <MTHPR4> SUB <MTHPR3> #11 | <MTHPR3>; 
+<MTHPR3> ::= <MTHPR3> MUL <MTHPR2> #12 | <MTHPR3> DIV <MTHPR2> #13 | <MTHPR2>;
+<MTHPR2> ::= <MTHPR1> EXP <MTHPR1> #14 | <MTHPR1> ;
+<MTHPR1> ::= OPR <MTHPR4> CPR | INT #3 | VAR #2;
