@@ -87,7 +87,7 @@ public class MainController extends Semantico {
             case 11: // -
                 a = data.pop();
                 b = data.pop();
-                data.push(a-b);
+                data.push(b-a);
                 break;
             case 12: // *
                 a = data.pop();
@@ -97,7 +97,7 @@ public class MainController extends Semantico {
             case 13: // /
                 a = data.pop();
                 b = data.pop();
-                data.push(a/b);
+                data.push(b/a);
                 break;
             case 14: // ^
                 a = data.pop();
